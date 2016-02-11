@@ -54,4 +54,9 @@
     $( "#sortable" ).disableSelection();
   });
 </script>
+    <?php   
+        include("autoLoad.php");
+        include("config.php");
+        include("../models/mypdo.php");
+    ?>
 </head>

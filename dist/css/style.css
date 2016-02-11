@@ -12,3 +12,11 @@
 	padding-left : 0;
 }
 
+
+.slide-fade li {
+  transition: all 0.4s ease-out;
+  opacity: 0;
+}
+.slide-fade li.show {
+  opacity: 1;
+}

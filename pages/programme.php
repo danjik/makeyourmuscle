@@ -2,7 +2,12 @@
 <html lang="en">
 
 
-        <?php include ("header.php"); ?>
+        <?php 
+            include ("header.php"); 
+            $db = new Mypdo();
+            $ficheExerciceController = new FicheExerciceController($db);
+            $list = $ficheExerciceController->getAllFicheExercice();
+        ?>
 
 <body>
 
@@ -18,35 +23,37 @@
 							<i class="fa fa-bar-chart-o fa-fw"></i> Créer une séance
 						</div>
 						<div class="panel-body">
-							<div class="form-group">
-                                <label>Choisir un exercice</label>
-                                <select class="form-control">
-	                                <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <p class="help-block">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quidem saepe molestiae repudiandae, debitis omnis sint laudantium mollitia exercitationem nihil obcaecati esse neque assumenda numquam odit, suscipit dolorum! Consequatur, accusamus.
-                                </p>
-                            </div>
-                            <div class="form-group" >
-                            	
-                            	<label for="serie">Nombre de série</label>
-                                <input id="serie" name="serie" type="number" class="form-control" placeholder="Nombre de série">
-                            </div>
-                            <div class="form-group" >
-                            	
-                            	<label for="repetition">Nombre de répétition</label>
-                                <input id="repetition" name="repetition" type="number" class="form-control" placeholder="Nombre de répétition">
-                            </div>
-                            <div class="form-group" >
-                            	<button type="button" class="btn btn-primary btn-lg btn-block">Ajouter l'exercice</button>
-                            </div>
+                            <form id="formExercice" name="formExercice">
+    							<div class="form-group">
+                                    <label>Choisir un exercice</label>
+                                    <select class="form-control" id="exercice">
+                                        <?php
+                                            foreach ($list as $value) {
+                                                echo "<option idPartieCorps='".$value->getIdPartieCorps()."' id='".$value->getIdFicheExercice()."'>".$value->getTitre()."</option>";
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <p class="help-block">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quidem saepe molestiae repudiandae, debitis omnis sint laudantium mollitia exercitationem nihil obcaecati esse neque assumenda numquam odit, suscipit dolorum! Consequatur, accusamus.
+                                    </p>
+                                </div>
+                                <div class="form-group" >
+                                	
+                                	<label for="serie">Nombre de série</label>
+                                    <input id="serie" name="serie" type="number" class="form-control" placeholder="Nombre de série" required="required">
+                                </div>
+                                <div class="form-group" >
+                                	
+                                	<label for="repetition">Nombre de répétition</label>
+                                    <input id="repetition" name="repetition" type="number" class="form-control" placeholder="Nombre de répétition" required="required">
+                                </div>
+                                <div class="form-group" >
+                                	<button type="button" id="addExercice" class="btn btn-primary btn-lg btn-block">Ajouter l'exercice</button>
+                                </div>
+                            </form>
 						</div>
 
                     </div>
@@ -56,16 +63,12 @@
           		  		<div class="panel-heading">
 							<i class="fa fa-bar-chart-o fa-fw"></i> Résumé de la séance
 						</div>
-						<div class="panel-body">
+						<div class="panel-body slide-fade">
 							<ul id="sortable">
-							  <li repetition="1" class="list-group-item ui-state-default list-group-item-success"></span>Item 1</li>
-							  <li class="list-group-item ui-state-default list-group-item-info"></span>Item 2</li>
-							  <li class="list-group-item ui-state-default list-group-item-warning"></span>Item 3</li>
-							  <li class="list-group-item ui-state-default list-group-item-danger"></span>Item 4</li>
-							  <li class="list-group-item ui-state-default"></span>Item 5</li>
-							  <li class="list-group-item ui-state-default"></span>Item 6</li>
-							  <li class="list-group-item ui-state-default"></span>Item 7</li>
 							</ul>
+							<div class="form-group" >
+	                        	<button type="button" id="validerSeance" class="btn btn-primary btn-lg btn-block">Valider la séance</button>
+	                        </div>
 						</div>
 					</div>
        			</div>
